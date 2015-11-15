@@ -38,6 +38,37 @@ func TestFindField(t *testing.T) {
 }
 
 
+type testStruct struct {
+	Snade int
+}
+
+type testStruct2 struct {
+	testStruct
+}
+
+func (t testStruct2) Super() interface{} {
+	return &t.testStruct
+}
+
+func (t testStruct) test() {
+	println("CALLED TEST")
+}
+
+func (t testStruct) String() string {
+	return "Hello"
+}
+
+func TestTypeImplements(t *testing.T) {
+	test := testStruct2{}
+
+	r := TypeImplements(test, "test")
+
+	test.test()
+	println(test.Snade)
+
+	println(r.Name())
+}
+
 
 func init() {
 	logging.SetLevel(logging.LevelTrace)

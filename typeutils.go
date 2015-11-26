@@ -18,7 +18,7 @@ func FindField(instance interface{}, field string, depth int) interface{} {
 
 		switch fieldValue.Kind() {
 		case reflect.Struct:
-			if depth > 0 || depth == -1 {
+			if depth > 0 || depth < 0 {
 				result := FindField(fieldValue.Interface(), field, (depth-1))
 				if result != nil {
 					return result
